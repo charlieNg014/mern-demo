@@ -3,15 +3,14 @@ let User = require('../models/user.model');     //require the model
 
 
 //first route, hanlding incoming get request to find the users
-router.route('/', get((req, res) => {
-    user.find()
+router.get("/", function(req, res){
+    User.find()
     .then(users => res.json(users))
-    .catch(err => res.status(400).json('Error: ' + err))
-}));
-
+    .catch(err => res.status(400).json("Error: " + err))
+})
 
 //if the post request, then we create new instance of User and save it to DB
-router.route('/add').post((req, res) => {
+router.post("/add", function(req, res) {
     const username = req.body.username;
     const newUser = new User({username});
 

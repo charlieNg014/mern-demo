@@ -13,7 +13,7 @@ app.use(express.json());
 
 //connect to db
 //we can set the database latter on by adding at the end 
-const url = 'mongodb://127.0.0.1:27017';
+const url = 'mongodb://127.0.0.1:27017/test';
 mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
 const db = mongoose.connection; 
 db.once('open', _ => {
@@ -27,10 +27,10 @@ db.once('open', _ => {
 })
 
 //require files to routes
-const exercisesRouter = require('./models/exercise.model');
-const usersRouter = require('./models/user.model');
+const exercisesRouter = require('./routes/exercises');
+const usersRouter = require('./routes/users');
 app.use("/users", usersRouter);
-app.use("/exercies", exercisesRouter);
+app.use("/exercises", exercisesRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
